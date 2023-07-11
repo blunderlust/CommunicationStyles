@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Communication Style Quiz</title>
+    <style>
+        
+        .question {
+            margin-bottom: 20px;
+        }
+        .strongly-disagree {
+            color: #FF0000; font-size: .85rem;
+                }
+
+        .disagree {
+            color: #d46b6b; font-size: .75rem;
+                }
+
+        .neutral {
+            color: #808080;  font-size: .70rem;
+              }
+
+        .agree {
+            color: #64b964; font-size: .75rem;
+            }
+
+        .strongly-agree {
+            color: #00dd00; font-size: .85rem;
+            }
+
+        p {
+            font-size: 1.1rem;  /* 85% of the default font size */
+            }
+
+    </style>
+</head>
+<body>
+    <form id="quizForm">
+        <div id="questions"></div>
+        <button type="button" onclick="calculateScores()">Submit</button>
+    </form>
+    <div id="result"></div>
+
+    <script>
+        // Questions for the quiz
+        const questions = [
+    { text: "1. I often rely on concrete data and facts to support my points in conversations.", type: "Analytical" },
+    { text: "2. I feel more comfortable when discussions are rooted in logic and objectivity, rather than emotions.", type: "Analytical" },
+    { text: "3. I prefer written communication that is detailed and full of factual information.", type: "Analytical" },
+    { text: "4. I appreciate candid, direct feedback, even if it may seem blunt.", type: "Analytical" },
+    { text: "5. I prefer succinct and concise conversations, and generally avoid engaging in small talk.", type: "Analytical" },
+    { text: "6. I trust my instincts and gut feelings, even if they are not supported by hard data or facts.", type: "Intuitive" },
+    { text: "7. I naturally gravitate towards the big picture, rather than getting caught up in the details.", type: "Intuitive" },
+    { text: "8. I enjoy participating in brainstorming sessions and contributing creative ideas.", type: "Intuitive" },
+    { text: "9. I find visual or illustrative information more appealing and easier to understand than written text.", type: "Intuitive" },
+    { text: "10. I often take time to ponder over information and ask follow-up questions to gain deeper insights.", type: "Intuitive" },
+    { text: "11. I pay close attention to details and like to follow a structured process or order.", type: "Functional" },
+    { text: "12. I like to plan thoroughly and ensure I have all relevant information before making decisions.", type: "Functional" },
+    { text: "13. I find comfort in following a step-by-step plan or task list.", type: "Functional" },
+    { text: "14. I frequently ask for feedback to ensure I am on the right path.", type: "Functional" },
+    { text: "15. I prefer not to rush things, especially when focusing on the specifics of a plan or task.", type: "Functional" },
+    { text: "16. I value emotional connections and consider feelings to be an important part of communication.", type: "Personal" },
+    { text: "17. I make a conscious effort to understand and respect others' feelings during conversations.", type: "Personal" },
+    { text: "18. I am comfortable sharing my feelings honestly and openly with others.", type: "Personal" },
+    { text: "19. I handle personal questions with diplomacy and articulate responses, without taking offense.", type: "Personal" },
+    { text: "20. I typically remember the overarching theme of a conversation, rather than specific details.", type: "Personal" }
+
+
+        ];
+        
+        // Function to generate the quiz form
+        function generateQuiz() {
+            const container = document.getElementById('questions');
+            questions.forEach((question, i) => {
+                const div = document.createElement('div');
+                div.className = 'question';
+                div.innerHTML = `
+    <p>${question.text}</p>
+    <input type="radio" name="question${i}" value="1"> <span class="strongly-disagree">Strongly Disagree</span>
+    <input type="radio" name="question${i}" value="2"> <span class="disagree">Disagree</span>
+    <input type="radio" name="question${i}" value="3"> <span class="neutral">Neutral</span>
+    <input type="radio" name="question${i}" value="4"> <span class="agree">Agree</span>
+    <input type="radio" name="question${i}" value="5"> <span class="strongly-agree">Strongly Agree</span>
+`;
+                container.appendChild(div);
+            });
+        }
+
+        // Function to calculate scores
+        function calculateScores() {
+            const scores = { Analytical: 0, Intuitive: 0, Functional: 0, Personal: 0 };
+            const form = document.getElementById('quizForm');
+            questions.forEach((question, i) => {
+                const value = form[`question${i}`].value;
+                if (value) {
+                    scores[question.type] += Number(value);
+                }
+            });
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '';
+            for (const type in scores) {
+                const p = document.createElement('p');
+                p.textContent = `${type}: ${scores[type]}`;
+                resultDiv.appendChild(p);
+            }
+        }
+
+        generateQuiz();
+    </script>
+    <p>
+
+        <b>Analytical Communication Style</b>
+        
+        If your score is highest in the Analytical category, it means you value data, facts, and logical arguments in your communication. You prioritize objectivity and precision, often preferring detailed written communication and direct, straightforward feedback. This approach can be particularly effective in environments where accuracy and data-driven decisions are valued, such as technical or financial industries.
+        
+        However, be aware that an overly analytical style can sometimes come off as cold or impersonal, and may overlook the emotional elements of communication. Strive to balance your analytical strength with empathy and emotional understanding, especially in interpersonal or emotionally charged situations.
+        </p>
+        <p><b>Intuitive Communication Style</b>
+        
+        If your score is highest in the Intuitive category, it suggests that you rely on your instincts and are comfortable looking at the big picture. You appreciate brainstorming and creative thinking, and you often rely on visual aids to understand and communicate information. This style can be very effective in creative, strategic, or visionary roles, where innovation and big-picture thinking are essential.
+        
+        Keep in mind, however, that intuitive communicators can sometimes overlook details or miss concrete facts. If you're an intuitive communicator, make sure to take time to understand the details and don't shy away from data when it's necessary.
+        </p>
+        <p><b>Functional Communication Style</b>
+        
+        If your score is highest in the Functional category, you tend to be detail-oriented, methodical, and well-organized in your communication. You appreciate structure, planning, and clear, step-by-step processes. This style is highly effective in roles that require precision, careful planning, or process optimization, such as project management or operations.
+        
+        However, a highly functional communication style can sometimes become overly focused on details and lose sight of the bigger picture. If you're a functional communicator, remember to occasionally step back and consider the overall objectives or broader strategic context.
+        </p>
+        <p><b>Personal Communication Style</b>
+        
+        If your score is highest in the Personal category, you place a high value on emotional connections and interpersonal relationships in your communication. You are considerate of others' feelings and strive to create an open and honest dialogue. This style can be incredibly effective in roles that require strong interpersonal skills, such as HR, customer service, or leadership positions.
+        
+        But remember, personal communicators can sometimes become overly focused on feelings and interpersonal dynamics, potentially losing sight of the task at hand. If you're a personal communicator, remember to balance your emotional intelligence with a focus on objectives and outcomes.
+        
+        Understanding your communication style and the styles of others can greatly enhance your effectiveness in both professional and personal settings. It can help you tailor your communication approach to different situations and individuals, improving understanding, cooperation, and collaboration.</p>
+</body>
+</html>
